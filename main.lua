@@ -20,9 +20,17 @@ function love.load()
             splitImage(image)
         end
     end
+
+    -- load font.
+    pixellariSmall = love.graphics.newFont("resources/pixellari.ttf", 24)
+    pixellariLarge = love.graphics.newFont("resources/pixellari.ttf", 34)
 end
 
 function love.draw()
+
+    -- Setting font: 
+    love.graphics.setFont(pixellariLarge)
+
     -- Player 1 buttons (Top-Left)
     for i, button in ipairs(diceButtons) do
 
@@ -45,6 +53,7 @@ function love.draw()
     end
 
     -- Roll button (Center-Top)
+    love.graphics.setFont(pixellariSmall)
     love.graphics.rectangle("fill", love.graphics.getWidth() / 2 - 50, 10, 100, 50)
     love.graphics.setColor(0, 0, 0)
     love.graphics.print("ROLL", love.graphics.getWidth() / 2 - 20, 25)
