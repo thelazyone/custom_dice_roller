@@ -58,7 +58,7 @@ function love.draw()
         love.graphics.draw(button.image, button.quad, btnX, yPos, 0, buttonScale, buttonScale)
         love.graphics.print(button.count2, btnX - 20, yPos + buttonSize / 4)
     end
-
+ 
     -- Roll button (Center-Top)
     love.graphics.rectangle("fill", love.graphics.getWidth() / 2 - 140, 10, 130, 50)
     love.graphics.setColor(0, 0, 0)
@@ -77,6 +77,11 @@ function love.draw()
 
     -- Number of dice per row
     local dicePerRow = 3
+
+    -- Central divider.
+    if (next(results1) ~= nil) or (next(results2) ~= nil) then
+        love.graphics.rectangle("fill", love.graphics.getWidth() / 2 - 10, startY, 20, love.graphics.getHeight() - startY - 30)
+    end
 
     -- Display Player 1 results
     for i, result in ipairs(results1) do
