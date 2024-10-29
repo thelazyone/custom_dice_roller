@@ -5,6 +5,7 @@ local diceFaces = {}
 local results1 = {}
 local results2 = {}
 
+-- Parameters
 local cubeSizes = 200                               -- Size of the result roll (should be bigger!)
 local buttonSize = 50                               -- Size of the buttons (width and height)
 local buttonPadding = 10                            -- Padding between buttons
@@ -27,7 +28,7 @@ function love.load()
         end
     end
 
-    -- load font.
+    -- Load a custom font
     pixellariSmall = love.graphics.newFont("resources/pixellari.ttf", 24)
     pixellariLarge = love.graphics.newFont("resources/pixellari.ttf", 34)
 end
@@ -127,20 +128,6 @@ function love.mousepressed(x, y, button, istouch, presses)
     if x >= love.graphics.getWidth() / 2 + 10 and x <= love.graphics.getWidth() / 2 + 140 and y >= 10 and y <= 60 then
         resetCounters()
     end
-
-    -- -- Display Player 1 results
-    -- for i, result in ipairs(results1) do
-    --     local x = (i - 1) % 10 * 100 + 10
-    --     local y = math.floor((i - 1) / 10) * 100 + 400
-    --     love.graphics.draw(result.image, result.quad, x, y, 0, 0.5, 0.5)
-    -- end
-
-    -- -- Display Player 2 results
-    -- for i, result in ipairs(results2) do
-    --     local x = love.graphics.getWidth() - ((i - 1) % 10 * 100 + 60)
-    --     local y = math.floor((i - 1) / 10) * 100 + 400
-    --     love.graphics.draw(result.image, result.quad, x, y, 0, 0.5, 0.5)
-    -- end
 end
 
 -- OTHER METHODS
@@ -175,11 +162,13 @@ function rollDice()
     results2 = {}
 
     for i, die in ipairs(diceFaces) do
+
         -- Player 1 rolls
         for j = 1, diceButtons[i].count1 do
             local faceIndex = love.math.random(1, 6)
             table.insert(results1, { image = die.image, quad = die.quads[faceIndex] })
         end
+
         -- Player 2 rolls
         for j = 1, diceButtons[i].count2 do
             local faceIndex = love.math.random(1, 6)
@@ -189,6 +178,7 @@ function rollDice()
 end
 
 function resetCounters()
+
     -- Reset counts for both players
     for _, btn in ipairs(diceButtons) do
         btn.count1 = 0
